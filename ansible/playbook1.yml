@@ -1,0 +1,26 @@
+---
+- hosts: '{{host}}'
+  vars: 
+       pkg: nginx
+       #  vars_files:
+       # - var.yml
+  vars_prompt:
+        - name: pkg2
+          prompt: Enter the "telenet" package name
+          private: no
+  tasks:
+        - name: Installs nginx web server
+          apt: name={{pkg}} state=latest 
+          notify:
+                   - start nginx
+
+        - name: Upload default index.html for host
+          copy: src=/root/index.html dest=/var/www/html/index.nginx-debian.html mode=0644
+          # - name: Installs curl package
+          # apt: name={{pkg1}} state=latest 
+        - name: Installs telenet package
+          apt: name={{pkg2}} state=latest 
+
+  handlers:
+        - name: start nginx
+          service: name={{pkg}} state=started

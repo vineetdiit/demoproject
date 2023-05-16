@@ -1,0 +1,16 @@
+---
+- hosts: servers
+  tasks:
+          - name: install nginx
+            apt: name=nginx state=latest
+
+          - name: copy src code
+            copy: src=/root/index.html dest=/var/www/html/index.nginx-debian.html
+            notify:
+                    - restart nginx
+
+  handlers:
+          - name: restart nginx
+            service: name=nginx state=restarted
+
+
