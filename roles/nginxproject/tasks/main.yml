@@ -1,0 +1,11 @@
+---
+ - name: install nginx
+   apt: name={{app}} state=latest 
+ - name: copy source code
+   copy: src={{src1}} dest={{dest1}}
+ - name: creating file
+   file: dest=/root/devops state=touch 
+   notify:
+          - restart nginx
+          - create file
+

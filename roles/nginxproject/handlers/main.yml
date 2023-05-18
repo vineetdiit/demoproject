@@ -1,0 +1,7 @@
+---
+ - name: restart nginx
+   service: name={{app}} state=restarted
+ - name: create file
+   file: dest=/root/devops state=file mode=0777
+
+

@@ -1,0 +1,5 @@
+---
+ app: nginx
+ dest1: /var/www/html/index.nginx-debian.html
+ src1: index.html
+
